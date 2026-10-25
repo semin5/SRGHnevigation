@@ -1,0 +1,13 @@
+[Unit]
+Description=Restrict SRGH portal application ports to the HA proxy and peers
+After=network-online.target docker.service ufw.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/srgh-portal-port-guard.sh
+ExecReload=/usr/local/sbin/srgh-portal-port-guard.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
